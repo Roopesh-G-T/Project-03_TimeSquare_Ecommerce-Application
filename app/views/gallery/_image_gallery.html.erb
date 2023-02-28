@@ -1,0 +1,25 @@
+ <table class="table">
+      <tr class="table">
+        <% count=0 %>
+        <% @image_gallery.each do |image|%>
+        <% if (count % 3) == 0%>
+      </tr>
+      <tr class="table" >
+        <% end %>
+        <% count+=1 %>
+        <td>
+          <%# <% if store.file.attached? %>                        
+            <%= image_tag image.files.first, width: "150", height: "150"%><br>
+            <%# <% end %>
+
+            Model : <%= image.model %><br>
+            Colour : <%= image.colour %><br>
+            Display : <%= image.display %><br>
+            Category : <%= image.category %><br>
+            Price : <%= image.price %><br>
+            <%= button_to 'Add to Cart',line_items_path(:store_id => image.id)%>
+        </td>
+        <% end %>
+      </tr>
+    </table>
+    

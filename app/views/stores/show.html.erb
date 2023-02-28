@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @store.model %>
+</p>
+
+<p>
+  <strong>Colour:</strong>
+  <%= @store.colour %>
+</p>
+
+<p>
+  <strong>Display:</strong>
+  <%= @store.display %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @store.category %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @store.price %>
+</p>
+
+<!-- 
+  <% @store.files.each do |file| %>
+   <%= link_to file.filename, rails_blob_path(file, disposition: :attachment) %>
+ <% end %>
+-->
+
+   <% if @store.files.any? %>
+   <p><strong>Picture:</strong></p>
+   <% @store.files.each do |file| %>
+     <% if file.variable? %>
+       <%= image_tag file.variant(resize: "200x200") %>
+     <% elsif file.previewable? %>
+       <%= image_tag file.preview(resize: "200x200"), rails_blob_path(file, disposition: :attachment) %>
+     <% else %>
+       <%= link_to file.filename, rails_blob_path(file, disposition: :attachment) %>
+     <% end %>
+   <% end %>
+ <% end %>
+
+<br>
+<br>
+<br>
+
+<%= link_to 'Edit', edit_store_path(@store) %>
+<%= link_to 'Back', stores_path %>
